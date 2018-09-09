@@ -56,7 +56,7 @@ class Tuple(tuple):
     def norm(self):
         return self / self.mag()
 
-    def dot(self, other): # Jack's 914-833 3500
+    def dot(self, other):
         return sum([a * b for a, b in zip(self, other)])
 
     def cross(self, other):

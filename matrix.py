@@ -5,6 +5,7 @@ import copy
 import math
 
 from tuples import Tuple
+from ray import Ray
 
 class Matrix(object):
     def __init__(self, size=4, vals=None):
@@ -71,6 +72,9 @@ class Matrix(object):
             for c in range(self.size):
                 cf[r][c] = float(self._cofactor(r, c)) / d
         return Matrix(vals=cf).transpose()
+
+    def transform(self, ray):
+        return Ray(self * ray.origin, self * ray.direction)
 
     @staticmethod
     def translate(x, y, z):

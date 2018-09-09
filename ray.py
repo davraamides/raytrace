@@ -9,5 +9,8 @@ class Ray(object):
         self.origin = origin
         self.direction = direction
 
+    def __repr__(self):
+        return "ray(origin: {}, direction: {})".format(self.origin, self.direction)
+
     def position(self, t):
         return self.origin + self.direction * t
