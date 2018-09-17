@@ -4,6 +4,10 @@ from tuples import Point, Vector, Tuple
 
 class TestTuple(unittest.TestCase):
 
+    def assertTupleEqual(self, t1, t2):
+        for a, b in zip(t1, t2):
+            self.assertAlmostEqual(a, b, places=5)
+
     def test_point(self):
         p = Point(4.3, -4.2, 3.1)
         self.assertEqual(p.x, 4.3)
@@ -92,6 +96,19 @@ class TestTuple(unittest.TestCase):
         b = Vector(2, 3, 4)
         self.assertEqual(Vector(-1, 2, -1), a.cross(b))
         self.assertEqual(Vector(1, -2, 1), b.cross(a))
+
+    def test_reflection(self):
+        v = Vector(1, -1, 0)
+        n = Vector(0, 1, 0)
+        r = v.reflect(n)
+        self.assertEqual(r, Vector(1, 1, 0))
+
+        x = math.sqrt(2) / 2
+        v = Vector(0, -1, 0)
+        n = Vector(x, x, 0)
+        r = v.reflect(n)
+        self.assertTupleEqual(r, Vector(1, 0, 0))
+
 
 if __name__ == '__main__':
     unittest.main()

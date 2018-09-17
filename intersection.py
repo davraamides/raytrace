@@ -4,6 +4,10 @@ class Intersection(object):
         self.t = t
         self.object = obj
 
+    def __repr__(self):
+        return "intersection(object: {}, t: {})".format(self.object, self.t)
+
+
 def hit(intersections):
     """Return closest intersection in positive t direction
     """

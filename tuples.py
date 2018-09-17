@@ -51,7 +51,9 @@ class Tuple(tuple):
         return Tuple(self.x / other, self.y / other, self.z / other, self.w / other)
 
     def mag(self):
-        return math.sqrt(sum(_ * _ for _ in self))
+        # ignore the w-component which should be zero but in some
+        # inverse transformations can be non-zero
+        return math.sqrt(sum(_ * _ for _ in self[:3]))
 
     def norm(self):
         return self / self.mag()
@@ -85,6 +87,9 @@ class Tuple(tuple):
     @property
     def w(self):
         return self[3]
+
+    def reflect(self, normal):
+        return self - normal * 2 * self.dot(normal)
 
 # create aliases so we don't need to prefix with Tuple everywhere
 Point = Tuple.Point
